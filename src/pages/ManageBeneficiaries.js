@@ -28,15 +28,17 @@ const ManageBeneficiaries = () => {
   );
 
   const dispatch = useDispatch();
+
+  // Local States
   const [beneficiaryData, setBeneficiaryData] = useState(null);
   const [viewing, setViewing] = useState(null);
-
   const [deleteBeneficiaryData, setDeleteBeneficiaryData] = useState(null);
 
+  // Delete beneficiary handler
   const deleteHandler = (beneficiary) => {
-    dispatch(removeBeneficiary(beneficiary.id))
-    setDeleteBeneficiaryData(null)
-  }
+    dispatch(removeBeneficiary(beneficiary.id));
+    setDeleteBeneficiaryData(null);
+  };
 
   return (
     <Layout>
@@ -76,7 +78,7 @@ const ManageBeneficiaries = () => {
                   <img src={DeleteIcon} alt="Delete" width={25} />
                 </div>
                 <div onClick={() => setViewing(beneficiary)}>
-                    <img src={ViewIcon} alt="View" width={25} />
+                  <img src={ViewIcon} alt="View" width={25} />
                 </div>
               </td>
             </tr>
@@ -84,7 +86,7 @@ const ManageBeneficiaries = () => {
         </tbody>
       </table>
 
-      {beneficiaryData && (
+      {beneficiaryData?.id ? (
         <Modal onCloseModalHandler={() => setBeneficiaryData(null)}>
           <h2>{beneficiaryData.id ? "Edit Beneficiary" : "Add Beneficiary"}</h2>
           <BeneficiaryForm
@@ -92,6 +94,8 @@ const ManageBeneficiaries = () => {
             onClose={() => setBeneficiaryData(null)}
           />
         </Modal>
+      ) : (
+        ""
       )}
 
       {viewing && (
@@ -107,15 +111,15 @@ const ManageBeneficiaries = () => {
         </Modal>
       )}
 
-    {
-        deleteBeneficiaryData?.id ? <ConfirmationPopup 
+      {deleteBeneficiaryData?.id ? (
+        <ConfirmationPopup
           message={`Are you sure you want to delete the beneficiary?`}
           onCancel={() => setDeleteBeneficiaryData(null)}
           onConfirm={() => deleteHandler(deleteBeneficiaryData)}
         />
-        :
-        ''
-    }
+      ) : (
+        ""
+      )}
     </Layout>
   );
 };
