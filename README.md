@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Beneficiary Assessment - add, update, view and delete a beneficiary
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
