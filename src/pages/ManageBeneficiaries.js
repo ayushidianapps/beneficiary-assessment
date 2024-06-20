@@ -34,6 +34,9 @@ const ManageBeneficiaries = () => {
   const [viewing, setViewing] = useState(null);
   const [deleteBeneficiaryData, setDeleteBeneficiaryData] = useState(null);
 
+  // *** This shall be used to fetch all the Beneficiaries when this components mounts ***
+  // const { data, loading, error } = useGetAllBeneficiariesQuery();
+
   // Delete beneficiary handler
   const deleteHandler = (beneficiary) => {
     dispatch(removeBeneficiary(beneficiary.id));
@@ -86,7 +89,7 @@ const ManageBeneficiaries = () => {
         </tbody>
       </table>
 
-      {beneficiaryData?.id ? (
+      {beneficiaryData ? (
         <Modal onCloseModalHandler={() => setBeneficiaryData(null)}>
           <h2>{beneficiaryData.id ? "Edit Beneficiary" : "Add Beneficiary"}</h2>
           <BeneficiaryForm
